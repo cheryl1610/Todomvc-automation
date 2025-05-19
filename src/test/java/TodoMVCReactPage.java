@@ -7,6 +7,7 @@ public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
     private By firstTodoBy = By.xpath("//*[@class=\"todo-list\"]/li[1]/div/label");
+    private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
 
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
@@ -25,5 +26,9 @@ public class TodoMVCReactPage {
     public String getFirstToDoItem() {
         WebElement firstToDo = driver.findElement(firstTodoBy);
         return firstToDo.getText();
+    }
+
+    public int getLengthOfTodos() {
+        return driver.findElements(todoItemsBy).size();
     }
 }

@@ -24,6 +24,24 @@ public class TodoMVCReactPageTest {
         searchPage.navigate();
         searchPage.inputToDo("Buy Sweets");
         assertEquals(searchPage.getFirstToDoItem(),"Buy Sweets");
+    }
+    @Test
+    public void shouldAddMultipleItemsToTheToDoList() {
+        TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
+        searchPage.navigate();
+        searchPage.inputToDo("Buy Sweets");
+        searchPage.inputToDo("Walk the dog");
+        searchPage.inputToDo("Talk to Gary");
+        searchPage.inputToDo("Return Next items");
+        searchPage.inputToDo("Read a book");
+        assertEquals(searchPage.getLengthOfTodos(),4);
+    }
 
+    @Test
+    public void shouldAddEmptyItemToTheToDoList() {
+        TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
+        searchPage.navigate();
+        searchPage.inputToDo("");
+        assertEquals(searchPage.getLengthOfTodos(),0);
     }
 }
