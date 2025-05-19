@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
+    private By firstTodoBy = By.xpath("//*[@class=\"todo-list\"]/li[1]/div/label");
 
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
@@ -21,4 +22,8 @@ public class TodoMVCReactPage {
         todoBox.sendKeys(Keys.ENTER);
     }
 
+    public String getFirstToDoItem() {
+        WebElement firstToDo = driver.findElement(firstTodoBy);
+        return firstToDo.getText();
+    }
 }

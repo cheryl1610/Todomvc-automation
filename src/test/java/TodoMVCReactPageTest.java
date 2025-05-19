@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TodoMVCReactPageTest {
     private static ChromeDriver driver;
 
@@ -17,9 +19,11 @@ public class TodoMVCReactPageTest {
     }
 
     @Test
-    public void shouldFindSearchResultsForJava() {
+    public void shouldAddItemToTheToDoList() {
         TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
         searchPage.navigate();
-        searchPage.inputToDo("java");
+        searchPage.inputToDo("Buy Sweets");
+        assertEquals(searchPage.getFirstToDoItem(),"Buy Sweets");
+
     }
 }
