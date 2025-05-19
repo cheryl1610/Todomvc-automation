@@ -34,7 +34,7 @@ public class TodoMVCReactPageTest {
         searchPage.inputToDo("Talk to Gary");
         searchPage.inputToDo("Return Next items");
         searchPage.inputToDo("Read a book");
-        assertEquals(searchPage.getLengthOfTodos(),4);
+        assertEquals(searchPage.getLengthOfTodos(),5);
     }
 
     @Test
