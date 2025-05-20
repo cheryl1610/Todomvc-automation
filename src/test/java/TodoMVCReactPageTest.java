@@ -44,4 +44,12 @@ public class TodoMVCReactPageTest {
         searchPage.inputToDo("");
         assertEquals(searchPage.getLengthOfTodos(),0);
     }
-}
+
+    @Test
+    public void shouldAddSpecialCharactersToTheToDoList() {
+        TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
+        searchPage.navigate();
+        searchPage.inputToDo("@£%*!^?~");
+        assertEquals(searchPage.getFirstToDoItem(),"@£%*!^?~");
+    }
+    }
