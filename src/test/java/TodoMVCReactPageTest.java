@@ -87,5 +87,15 @@ public class TodoMVCReactPageTest {
         ToDoPage.toggleToDoItem(1);
         assertEquals(ToDoPage.getItemsLeft(),"2 items left!");
     }
-
+@Test
+    public void markItemIncomplete(){
+        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
+        ToDoPage.navigate();
+        ToDoPage.inputToDo("Buy Sweets");
+        ToDoPage.inputToDo("Walk the dog");
+        ToDoPage.inputToDo("Talk to Gary");
+        ToDoPage.toggleToDoItem(1);
+        ToDoPage.toggleToDoItem(1);
+        assertEquals(ToDoPage.getItemsLeft(),"3 items left!");
+}
 }
