@@ -23,8 +23,9 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
         searchPage.navigate();
         searchPage.inputToDo("Buy Sweets");
-        assertEquals(searchPage.getFirstToDoItem(),"Buy Sweets");
+        assertEquals(searchPage.getFirstToDoItem(), "Buy Sweets");
     }
+
     @Test
     public void shouldAddMultipleItemsToTheToDoList() {
         TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
@@ -34,7 +35,7 @@ public class TodoMVCReactPageTest {
         searchPage.inputToDo("Talk to Gary");
         searchPage.inputToDo("Return Next items");
         searchPage.inputToDo("Read a book");
-        assertEquals(searchPage.getLengthOfTodos(),5);
+        assertEquals(searchPage.getLengthOfTodos(), 5);
     }
 
     @Test
@@ -42,7 +43,7 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
         searchPage.navigate();
         searchPage.inputToDo("");
-        assertEquals(searchPage.getLengthOfTodos(),0);
+        assertEquals(searchPage.getLengthOfTodos(), 0);
     }
 
     @Test
@@ -50,6 +51,17 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
         searchPage.navigate();
         searchPage.inputToDo("@£%*!^?~");
-        assertEquals(searchPage.getFirstToDoItem(),"@£%*!^?~");
+        assertEquals(searchPage.getFirstToDoItem(), "@£%*!^?~");
+
     }
+
+    @Test
+    public void shouldAddTwoCharactersToTheToDoList() {
+        TodoMVCReactPage searchPage = new TodoMVCReactPage(driver);
+        searchPage.navigate();
+        searchPage.inputToDo("AB");
+        assertEquals(searchPage.getFirstToDoItem(), "AB");
+
     }
+
+}
