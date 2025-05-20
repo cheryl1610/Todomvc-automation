@@ -35,10 +35,18 @@ public class TodoMVCReactPage {
     }
 
     public void doubleClickFirstTodoItem() {
-        WebElement firstItem = driver.findElement(firstTodoBy);
+        WebElement firstItem = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
         Actions actions = new Actions(driver);
         actions.doubleClick(firstItem).perform();
     }
 
+    public void toggleToDoItem(int itemIndex) {
+        String selector = String.format("li:nth-child(%d) .toggle", itemIndex);
+        driver.findElement(By.cssSelector(selector)).click();
+}
 
+    public String getItemsLeft (){
+        WebElement toDoCount = driver.findElement(By.className("todo-count"));
+        return toDoCount.getText();
+    }
 }

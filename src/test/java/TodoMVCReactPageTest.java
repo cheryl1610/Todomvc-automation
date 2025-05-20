@@ -73,7 +73,19 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage todoPage = new TodoMVCReactPage(driver);
         todoPage.navigate();
         todoPage.inputToDo("Buy Sweets");
-        todoPage.doubleClickFirstTodoItem();// clicks on the first todo item
+        todoPage.doubleClickFirstTodoItem();
+        // This is not finished need to work out how to locate the inputted values and change it
 
     }
+    @Test
+    public void markItemComplete(){
+        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
+        ToDoPage.navigate();
+        ToDoPage.inputToDo("Buy Sweets");
+        ToDoPage.inputToDo("Walk the dog");
+        ToDoPage.inputToDo("Talk to Gary");
+        ToDoPage.toggleToDoItem(1);
+        assertEquals(ToDoPage.getItemsLeft(),"2 items left!");
+    }
+
 }
