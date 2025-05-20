@@ -2,12 +2,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
     private By firstTodoBy = By.xpath("//*[@class=\"todo-list\"]/li[1]/div/label");
     private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
+    //Actions act = new Actions(driver);
 
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
@@ -21,6 +23,7 @@ public class TodoMVCReactPage {
         WebElement todoBox = driver.findElement(todoBoxBy);
         todoBox.sendKeys(toDoItem);
         todoBox.sendKeys(Keys.ENTER);
+
     }
 
     public String getFirstToDoItem() {
@@ -31,4 +34,12 @@ public class TodoMVCReactPage {
     public int getLengthOfTodos() {
         return driver.findElements(todoItemsBy).size();
     }
+
+    public void doubleClickFirstTodoItem() {
+        WebElement firstItem = driver.findElement(firstTodoBy);
+        Actions actions = new Actions(driver);
+        actions.doubleClick(firstItem).perform();
+    }
+
+
 }
