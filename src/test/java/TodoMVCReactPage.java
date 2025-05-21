@@ -3,6 +3,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TodoMVCReactPage {
     protected WebDriver driver;
@@ -40,6 +41,13 @@ public class TodoMVCReactPage {
         actions.doubleClick(firstItem).sendKeys(text).sendKeys(Keys.ENTER).perform();
 
     }
+    public void cancelEditFirstTodoItem(String text) {
+        WebElement firstItemLabel = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
+        Actions actions = new Actions(driver);
+        actions.doubleClick(firstItemLabel)
+      .sendKeys(text)
+      .sendKeys(Keys.ESCAPE).perform();;
+    }
 
 
     public void toggleToDoItem(int itemIndex) {
@@ -54,5 +62,15 @@ public class TodoMVCReactPage {
     public void clearCompleted(){
         WebElement clearComplete = driver.findElement(By.className("clear-completed"));
         clearComplete.click();
+    }
+    public void clickOutToDoItem(String text){
+        WebElement firstItemLabel = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
+        Actions actions = new Actions(driver);
+        actions.doubleClick(firstItemLabel)
+                .sendKeys(text);
+        WebElement clickable = driver.findElement(By.cssSelector("html"));
+        new Actions(driver)
+                .click(clickable)
+                .perform();
     }
 }

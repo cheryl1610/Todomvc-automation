@@ -77,8 +77,25 @@ public class TodoMVCReactPageTest {
         todoPage.addTextToFirstTodoItem(" now!");
         assertEquals(todoPage.getFirstToDoItem(), "Buy Sweets now!");
 
-
     }
+
+    @Test
+    public void escModifyItemToDoList()  {
+        TodoMVCReactPage todoPage = new TodoMVCReactPage(driver);
+        todoPage.navigate();
+        todoPage.inputToDo("Buy Sweets");
+        todoPage.cancelEditFirstTodoItem("now");
+      assertEquals(todoPage.getFirstToDoItem(),"Buy Sweets");
+      /// This is an expected fail
+    }
+    @Test
+    public void clickOutModifyItemToDoList()  {
+        TodoMVCReactPage todoPage = new TodoMVCReactPage(driver);
+        todoPage.navigate();
+        todoPage.inputToDo("Buy Sweets");
+        todoPage.clickOutToDoItem("now");
+        assertEquals(todoPage.getFirstToDoItem(),"Buy Sweets");}
+
     @Test
     public void markItemComplete(){
         TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
