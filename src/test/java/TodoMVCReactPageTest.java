@@ -75,15 +75,6 @@ public class TodoMVCReactPageTest {
 /// known failure
     }
 
-//    @Test
-//    public void shouldAddemojiToTheToDoList() throws Exception {
-//        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
-//        toDoPage.navigate();
-//        toDoPage.addingEmoji();
-//        TodoMVCReactPage.takeScreenshot(driver,"emoji.png");
-//        assertEquals("Read U+1F47B\t'", toDoPage.getFirstToDoItem());
-//    }
-
 
 
     @Test
@@ -156,7 +147,7 @@ public class TodoMVCReactPageTest {
     toDoPage.inputToDo("Buy Sweets");
     toDoPage.inputToDo("Walk the dog");
     toDoPage.clickDeleteFirstItem();
-    TodoMVCReactPage.takeScreenshot(driver,"deleted?.png");
+    TodoMVCReactPage.takeScreenshot(driver,"deleted.png");
     assertEquals(1, toDoPage.getLengthOfTodos());
 }
 }
