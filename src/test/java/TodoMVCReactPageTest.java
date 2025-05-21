@@ -2,6 +2,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -23,79 +24,92 @@ public class TodoMVCReactPageTest {
 
     @Test
     public void shouldAddItemToTheToDoList() {
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("Buy Sweets");
-        assertEquals(ToDoPage.getFirstToDoItem(), "Buy Sweets");
+        TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+        todopage.navigate();
+        todopage.inputToDo("Buy Sweets");
+        assertEquals(todopage.getFirstToDoItem(), "Buy Sweets");
 
     }
 
     @Test
     public void shouldAddMultipleItemsToTheToDoList() {
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("Buy Sweets");
-        ToDoPage.inputToDo("Walk the dog");
-        ToDoPage.inputToDo("Talk to Gary");
-        ToDoPage.inputToDo("Return Next items");
-        ToDoPage.inputToDo("Read a book");
-        assertEquals(ToDoPage.getLengthOfTodos(), 5);
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("Buy Sweets");
+        toDoPage.inputToDo("Walk the dog");
+        toDoPage.inputToDo("Talk to Gary");
+        toDoPage.inputToDo("Return Next items");
+        toDoPage.inputToDo("Read a book");
+        assertEquals(toDoPage.getLengthOfTodos(), 5);
     }
 
     @Test
     public void shouldAddEmptyItemToTheToDoList() {
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("");
-        assertEquals(ToDoPage.getLengthOfTodos(), 0);
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("");
+        assertEquals(toDoPage.getLengthOfTodos(), 0);
     }
 
     @Test
     public void shouldAddSpecialCharactersToTheToDoList() {
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("@£%*!^?~");
-        assertEquals(ToDoPage.getFirstToDoItem(), "@£%*!^?~");
+        TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+        todopage.navigate();
+        todopage.inputToDo("@£%*!^?~");
+        assertEquals(todopage.getFirstToDoItem(), "@£%*!^?~");
 
     }
 
     @Test
     public void shouldAddTwoCharactersToTheToDoList() {
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("AB");
-        assertEquals(ToDoPage.getFirstToDoItem(), "AB");
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("AB");
+        assertEquals(toDoPage.getFirstToDoItem(), "AB");
 
     }
 
     @Test
-    public void modifyFirstItemToTheToDoList() {
+    public void modifyAddTextFirstItemToTheToDoList() {
         TodoMVCReactPage todoPage = new TodoMVCReactPage(driver);
         todoPage.navigate();
         todoPage.inputToDo("Buy Sweets");
-        todoPage.doubleClickFirstTodoItem();
-        // This is not finished need to work out how to locate the inputted values and change it
+        todoPage.addTextToFirstTodoItem(" now!");
+        assertEquals(todoPage.getFirstToDoItem(), "Buy Sweets now!");
+
 
     }
     @Test
     public void markItemComplete(){
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("Buy Sweets");
-        ToDoPage.inputToDo("Walk the dog");
-        ToDoPage.inputToDo("Talk to Gary");
-        ToDoPage.toggleToDoItem(1);
-        assertEquals(ToDoPage.getItemsLeft(),"2 items left!");
+        TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+        todopage.navigate();
+        todopage.inputToDo("Buy Sweets");
+        todopage.inputToDo("Walk the dog");
+        todopage.inputToDo("Talk to Gary");
+        todopage.toggleToDoItem(1);
+        assertEquals(todopage.getItemsLeft(),"2 items left!");
     }
 @Test
     public void markItemIncomplete(){
-        TodoMVCReactPage ToDoPage = new TodoMVCReactPage(driver);
-        ToDoPage.navigate();
-        ToDoPage.inputToDo("Buy Sweets");
-        ToDoPage.inputToDo("Walk the dog");
-        ToDoPage.inputToDo("Talk to Gary");
-        ToDoPage.toggleToDoItem(1);
-        ToDoPage.toggleToDoItem(1);
-        assertEquals(ToDoPage.getItemsLeft(),"3 items left!");
+        TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+        todopage.navigate();
+        todopage.inputToDo("Buy Sweets");
+        todopage.inputToDo("Walk the dog");
+        todopage.inputToDo("Talk to Gary");
+        todopage.toggleToDoItem(1);
+        todopage.toggleToDoItem(1);
+        assertEquals(todopage.getItemsLeft(),"3 items left!");
+}
+@Test
+    public void clearCompletedItems(){
+    TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+    toDoPage.navigate();
+    toDoPage.inputToDo("Buy Sweets");
+    toDoPage.inputToDo("Walk the dog");
+    toDoPage.inputToDo("Talk to Gary");
+    toDoPage.toggleToDoItem(1);
+    assertEquals(toDoPage.getLengthOfTodos(), 3);
+    toDoPage.clearCompleted();
+    assertEquals(toDoPage.getLengthOfTodos(), 2);
 }
 }
