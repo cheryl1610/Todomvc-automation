@@ -1,9 +1,8 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.io.File;
 
 public class TodoMVCReactPage {
     protected WebDriver driver;
@@ -46,7 +45,7 @@ public class TodoMVCReactPage {
         Actions actions = new Actions(driver);
         actions.doubleClick(firstItemLabel)
       .sendKeys(text)
-      .sendKeys(Keys.ESCAPE).perform();;
+      .sendKeys(Keys.ESCAPE).perform();
     }
 
 
@@ -73,4 +72,23 @@ public class TodoMVCReactPage {
                 .click(clickable)
                 .perform();
     }
+    public void clickDeleteFirstItem(){
+//
+        WebElement hoverable = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
+        new Actions(driver)
+                .moveToElement(hoverable)
+                .perform();
+        WebElement clickable = driver.findElement(By.xpath("//li[1]//div[1]//button[1]"));
+        new Actions(driver)
+                .click(clickable)
+                .perform();
+
+    }
+    public static void takeScreenshot(WebDriver webdriver, String desiredPath) throws Exception {
+        TakesScreenshot screenshot = ((TakesScreenshot) webdriver);
+        File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
+        File targetFile = new File(desiredPath);
+        FileUtils.copyFile(screenshotFile, targetFile);
+    }
+
 }
