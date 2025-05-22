@@ -179,6 +179,19 @@ public class TodoMVCReactPageTest {
         assertEquals("2 items left!", toDoPage.getItemsLeft());
     }
 
+@Test
+    public void activeTabCheck()throws Exception {
+    TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+    toDoPage.navigate();
+    toDoPage.inputToDo("Buy Sweets");
+    toDoPage.inputToDo("Walk the dog");
+    toDoPage.toggleToDoItem(1);
+    toDoPage.clickActive();
+    TodoMVCReactPage.takeScreenshot(driver,"activeView.png");
+    assertEquals("Walk the dog", toDoPage.getToDoItemTextAtIndex(1));
+
+
+}
 
 
 }

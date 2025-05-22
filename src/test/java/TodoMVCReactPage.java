@@ -8,6 +8,7 @@ public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
     private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
+
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -43,30 +44,33 @@ public class TodoMVCReactPage {
         actions.doubleClick(todoItem).sendKeys(text).sendKeys(Keys.ENTER).perform();
 
     }
+
     public void cancelEditTodoItem(int index, String text) {
         String selector = "ul.todo-list li:nth-child(" + index + ") label";
         WebElement todoItem = driver.findElement(By.cssSelector(selector));
         Actions actions = new Actions(driver);
         actions.doubleClick(todoItem)
-      .sendKeys(text)
-      .sendKeys(Keys.ESCAPE).perform();
+                .sendKeys(text)
+                .sendKeys(Keys.ESCAPE).perform();
     }
 
 
     public void toggleToDoItem(int itemIndex) {
         String selector = String.format("li:nth-child(%d) .toggle", itemIndex);
         driver.findElement(By.cssSelector(selector)).click();
-}
+    }
 
-    public String getItemsLeft (){
+    public String getItemsLeft() {
         WebElement toDoCount = driver.findElement(By.className("todo-count"));
         return toDoCount.getText();
     }
-    public void clearCompleted(){
+
+    public void clearCompleted() {
         WebElement clearComplete = driver.findElement(By.className("clear-completed"));
         clearComplete.click();
     }
-    public void clickOutToDoItem(String text){
+
+    public void clickOutToDoItem(String text) {
         WebElement firstItemLabel = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
         Actions actions = new Actions(driver);
         actions.doubleClick(firstItemLabel)
@@ -76,7 +80,8 @@ public class TodoMVCReactPage {
                 .click(clickable)
                 .perform();
     }
-    public void clickDeleteItem(int index){
+
+    public void clickDeleteItem(int index) {
         String selector = "ul.todo-list li:nth-child(" + index + ") label";
         WebElement hoverable = driver.findElement(By.cssSelector(selector));
         new Actions(driver)
@@ -87,14 +92,21 @@ public class TodoMVCReactPage {
         new Actions(driver)
                 .click(clickable)
                 .perform();
-
     }
+
+    public void clickActive() {
+        WebElement active = driver.findElement(By.linkText("Active"));
+        new Actions(driver)
+                .click(active)
+                .perform();
+    }
+
+
     public static void takeScreenshot(WebDriver webdriver, String desiredPath) throws Exception {
         TakesScreenshot screenshot = ((TakesScreenshot) webdriver);
         File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
         File targetFile = new File(desiredPath);
         FileUtils.copyFile(screenshotFile, targetFile);
     }
-
 
 }
