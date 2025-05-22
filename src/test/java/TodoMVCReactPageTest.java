@@ -193,5 +193,28 @@ public class TodoMVCReactPageTest {
 
 }
 
+    @Test
+    public void CompleteCheck()throws Exception {
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("Buy Sweets");
+        toDoPage.inputToDo("Walk the dog");
+        toDoPage.toggleToDoItem(1);
+        toDoPage.clickCompleted();
+        TodoMVCReactPage.takeScreenshot(driver,"completedView.png");
+        assertEquals("Buy Sweets", toDoPage.getToDoItemTextAtIndex(1));
+
+
+    }
+    @Test
+    public void CrossFrameworkCheck()throws Exception {
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("Buy Sweets");
+        toDoPage.inputToDo("Walk the dog");
+        toDoPage.navigateTodojo();
+        TodoMVCReactPage.takeScreenshot(driver, "dojoView.png");
+        assertTrue(toDoPage.DojoEmptyToDoList());
+    }
 
 }

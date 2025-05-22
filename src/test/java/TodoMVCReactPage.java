@@ -3,10 +3,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
+import java.util.List;
 
 public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
+    private By DojoToDoBoxBy = By.cssSelector("#dojox_mvc_Element_3");
     private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
 
     public TodoMVCReactPage(WebDriver driver) {
@@ -16,6 +18,14 @@ public class TodoMVCReactPage {
 
     public void navigate() {
         driver.get("https://todomvc.com/examples/react/dist/");
+    }
+    public void navigateTodojo() {
+        driver.get("https://todomvc.com/examples/dojo/");
+    }
+    public boolean DojoEmptyToDoList(){
+        List<WebElement> dojoToDoBox = driver.findElements(DojoToDoBoxBy);
+        return dojoToDoBox.isEmpty() || !dojoToDoBox.get(0).isDisplayed();
+
     }
 
     public void inputToDo(String toDoItem) {
@@ -100,6 +110,13 @@ public class TodoMVCReactPage {
                 .click(active)
                 .perform();
     }
+    public void clickCompleted() {
+        WebElement completed = driver.findElement(By.cssSelector("a[href='#/completed']"));
+        new Actions(driver)
+                .click(completed)
+                .perform();
+    }
+
 
 
     public static void takeScreenshot(WebDriver webdriver, String desiredPath) throws Exception {
