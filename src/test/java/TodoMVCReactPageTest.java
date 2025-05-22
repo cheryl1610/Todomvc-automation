@@ -86,7 +86,6 @@ public class TodoMVCReactPageTest {
         assertEquals("Buy Sweets now!", todoPage.getFirstToDoItem());
 
 
-
     }
 
     @Test
