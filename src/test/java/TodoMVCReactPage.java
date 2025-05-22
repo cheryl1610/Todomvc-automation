@@ -1,7 +1,6 @@
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-
 import java.io.File;
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
     private By DojoToDoBoxBy = By.cssSelector("#dojox_mvc_Element_3");
-    private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
+    private By todoItemsBy = By.cssSelector("label[data-testid='todo-item-label']");
 
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
@@ -26,6 +25,10 @@ public class TodoMVCReactPage {
         List<WebElement> dojoToDoBox = driver.findElements(DojoToDoBoxBy);
         return dojoToDoBox.isEmpty() || !dojoToDoBox.get(0).isDisplayed();
 
+    }
+    public boolean emptyToDoList(){
+        List<WebElement> emptyToDoList = driver.findElements(todoItemsBy);
+        return emptyToDoList.isEmpty() || !emptyToDoList.get(0).isDisplayed();
     }
 
     public void inputToDo(String toDoItem) {

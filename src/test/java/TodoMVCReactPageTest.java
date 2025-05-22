@@ -178,9 +178,24 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage.takeScreenshot(driver,"deleted.png");
         assertEquals("2 items left!", toDoPage.getItemsLeft());
     }
+    @Test
+    public void checkStatusBarZero(){
+        TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+        todopage.navigate();
+        assertTrue(todopage.emptyToDoList());
+    }
+
+    @Test
+    public void statusCheckpostDelete() {
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("Buy Sweets");
+        toDoPage.clickDeleteItem(1);
+        assertTrue(toDoPage.emptyToDoList());
+    }
 
 @Test
-    public void activeTabCheck()throws Exception {
+    public void activeTabCheck() throws Exception {
     TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
     toDoPage.navigate();
     toDoPage.inputToDo("Buy Sweets");
