@@ -9,7 +9,6 @@ public class TodoMVCReactPage {
     private By todoBoxBy = By.id("todo-input");
     private By firstTodoBy = By.cssSelector(".todo-list li:first-child label");
     private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
-
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
     }
