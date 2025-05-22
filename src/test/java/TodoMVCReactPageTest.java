@@ -2,7 +2,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoMVCReactPageTest {
     private static ChromeDriver driver;
@@ -148,4 +149,36 @@ public class TodoMVCReactPageTest {
     TodoMVCReactPage.takeScreenshot(driver,"deleted.png");
     assertEquals(1, toDoPage.getLengthOfTodos());
 }
+@Test
+    public void checkStatusBar(){
+        TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+        todopage.navigate();
+        todopage.inputToDo("Buy Sweets");
+        todopage.inputToDo("Walk the dog");
+        todopage.inputToDo("Talk to Gary");
+        assertEquals("3 items left!", todopage.getItemsLeft());
+
+    }
+   @Test
+   public void checkStatusBarOne(){
+       TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
+       todopage.navigate();
+       todopage.inputToDo("Buy Sweets");
+       assertEquals("1 item left!", todopage.getItemsLeft());
+
+   }
+    @Test
+    public void oneLeftToDoStatusCheck() throws Exception {
+        TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
+        toDoPage.navigate();
+        toDoPage.inputToDo("Buy Sweets");
+        toDoPage.inputToDo("Walk the dog");
+        toDoPage.inputToDo("Read a book");
+        toDoPage.clickDeleteItem(1);
+        TodoMVCReactPage.takeScreenshot(driver,"deleted.png");
+        assertEquals("2 items left!", toDoPage.getItemsLeft());
+    }
+
+
+
 }

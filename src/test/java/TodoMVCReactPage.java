@@ -35,6 +35,7 @@ public class TodoMVCReactPage {
         return driver.findElements(todoItemsBy).size();
     }
 
+
     public void addTextToTodoItem(int index, String text) {
         String selector = "ul.todo-list li:nth-child(" + index + ") label";
         WebElement todoItem = driver.findElement(By.cssSelector(selector));
