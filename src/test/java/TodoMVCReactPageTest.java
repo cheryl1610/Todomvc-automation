@@ -39,6 +39,7 @@ public class TodoMVCReactPageTest {
         toDoPage.inputToDo("Return Next items");
         toDoPage.inputToDo("Read a book");
         assertEquals(5, toDoPage.getLengthOfTodos());
+        System.out.println(toDoPage.getToDoItemTextAtIndex(3));
     }
 
     @Test

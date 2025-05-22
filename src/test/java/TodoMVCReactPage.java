@@ -29,6 +29,12 @@ public class TodoMVCReactPage {
         WebElement firstToDo = driver.findElement(firstTodoBy);
         return firstToDo.getText();
     }
+    public String getToDoItemTextAtIndex(int index) {
+        // index is 1-based: 1 = first item, 2 = second item, etc.
+        String selector = "ul.todo-list li:nth-child(" + index + ") label";
+        WebElement todoItem = driver.findElement(By.cssSelector(selector));
+        return todoItem.getText();
+    }
 
     public int getLengthOfTodos() {
         return driver.findElements(todoItemsBy).size();
