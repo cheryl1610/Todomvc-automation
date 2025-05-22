@@ -7,7 +7,6 @@ import java.io.File;
 public class TodoMVCReactPage {
     protected WebDriver driver;
     private By todoBoxBy = By.id("todo-input");
-    private By firstTodoBy = By.cssSelector(".todo-list li:first-child label");
     private By todoItemsBy = By.xpath("//*[@class=\"todo-list\"]/li/div/label");
     public TodoMVCReactPage(WebDriver driver) {
         this.driver = driver;
@@ -25,10 +24,6 @@ public class TodoMVCReactPage {
 
     }
 
-    public String getFirstToDoItem() {
-        WebElement firstToDo = driver.findElement(firstTodoBy);
-        return firstToDo.getText();
-    }
     public String getToDoItemTextAtIndex(int index) {
         // index is 1-based: 1 = first item, 2 = second item, etc.
         String selector = "ul.todo-list li:nth-child(" + index + ") label";
@@ -40,16 +35,18 @@ public class TodoMVCReactPage {
         return driver.findElements(todoItemsBy).size();
     }
 
-    public void addTextToFirstTodoItem(String text) {
-        WebElement firstItem = driver.findElement(firstTodoBy);
+    public void addTextToTodoItem(int index, String text) {
+        String selector = "ul.todo-list li:nth-child(" + index + ") label";
+        WebElement todoItem = driver.findElement(By.cssSelector(selector));
         Actions actions = new Actions(driver);
-        actions.doubleClick(firstItem).sendKeys(text).sendKeys(Keys.ENTER).perform();
+        actions.doubleClick(todoItem).sendKeys(text).sendKeys(Keys.ENTER).perform();
 
     }
-    public void cancelEditFirstTodoItem(String text) {
-        WebElement firstItemLabel = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
+    public void cancelEditTodoItem(int index, String text) {
+        String selector = "ul.todo-list li:nth-child(" + index + ") label";
+        WebElement todoItem = driver.findElement(By.cssSelector(selector));
         Actions actions = new Actions(driver);
-        actions.doubleClick(firstItemLabel)
+        actions.doubleClick(todoItem)
       .sendKeys(text)
       .sendKeys(Keys.ESCAPE).perform();
     }
@@ -78,13 +75,14 @@ public class TodoMVCReactPage {
                 .click(clickable)
                 .perform();
     }
-    public void clickDeleteFirstItem(){
-//
-        WebElement hoverable = driver.findElement(By.cssSelector(".todo-list li:first-child label"));
+    public void clickDeleteItem(int index){
+        String selector = "ul.todo-list li:nth-child(" + index + ") label";
+        WebElement hoverable = driver.findElement(By.cssSelector(selector));
         new Actions(driver)
                 .moveToElement(hoverable)
                 .perform();
-        WebElement clickable = driver.findElement(By.xpath("//li[1]//div[1]//button[1]"));
+        String deleteButtonSelector = ".todo-list li:nth-child(" + index + ") button.destroy";
+        WebElement clickable = driver.findElement(By.cssSelector(deleteButtonSelector));
         new Actions(driver)
                 .click(clickable)
                 .perform();

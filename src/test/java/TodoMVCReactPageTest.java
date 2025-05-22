@@ -1,10 +1,7 @@
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.openqa.selenium.chrome.ChromeDriver;
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoMVCReactPageTest {
@@ -13,6 +10,7 @@ public class TodoMVCReactPageTest {
     @BeforeAll
     static void launchBrowser() {
         driver = new ChromeDriver();
+
     }
 
     @AfterAll
@@ -25,7 +23,7 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
         todopage.navigate();
         todopage.inputToDo("Buy Sweets");
-        assertEquals("Buy Sweets", todopage.getFirstToDoItem());
+        assertEquals("Buy Sweets", todopage.getToDoItemTextAtIndex(1));
 
     }
 
@@ -55,7 +53,7 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage todopage = new TodoMVCReactPage(driver);
         todopage.navigate();
         todopage.inputToDo("@£%*!^?~");
-        assertEquals("@£%*!^?~", todopage.getFirstToDoItem());
+        assertEquals("@£%*!^?~", todopage.getToDoItemTextAtIndex(1));
 
     }
 
@@ -64,7 +62,7 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
         toDoPage.navigate();
         toDoPage.inputToDo("AB");
-        assertEquals("AB", toDoPage.getFirstToDoItem());
+        assertEquals("AB", toDoPage.getToDoItemTextAtIndex(1));
 
     }
     @Test
@@ -72,7 +70,7 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage toDoPage = new TodoMVCReactPage(driver);
         toDoPage.navigate();
         toDoPage.inputToDo("A");
-        assertEquals("A", toDoPage.getFirstToDoItem());
+        assertEquals("A", toDoPage.getToDoItemTextAtIndex(1));
 /// known failure
     }
 
@@ -83,8 +81,8 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage todoPage = new TodoMVCReactPage(driver);
         todoPage.navigate();
         todoPage.inputToDo("Buy Sweets");
-        todoPage.addTextToFirstTodoItem(" now!");
-        assertEquals("Buy Sweets now!", todoPage.getFirstToDoItem());
+        todoPage.addTextToTodoItem(1, " now!");
+        assertEquals("Buy Sweets now!", todoPage.getToDoItemTextAtIndex(1));
 
 
     }
@@ -94,8 +92,8 @@ public class TodoMVCReactPageTest {
         TodoMVCReactPage todoPage = new TodoMVCReactPage(driver);
         todoPage.navigate();
         todoPage.inputToDo("Buy Sweets");
-        todoPage.cancelEditFirstTodoItem("now");
-      assertEquals("Buy Sweets", todoPage.getFirstToDoItem());
+        todoPage.cancelEditTodoItem(1,"now");
+      assertEquals("Buy Sweets", todoPage.getToDoItemTextAtIndex(1));
       /// This is an expected fail as the esc doesn't esc the edit mode
     }
     @Test
@@ -104,7 +102,7 @@ public class TodoMVCReactPageTest {
         todoPage.navigate();
         todoPage.inputToDo("Buy Sweets");
         todoPage.clickOutToDoItem("now");
-        assertEquals("Buy Sweets", todoPage.getFirstToDoItem());}
+        assertEquals("Buy Sweets", todoPage.getToDoItemTextAtIndex(1));}
 
     @Test
     public void markItemComplete(){
@@ -146,7 +144,7 @@ public class TodoMVCReactPageTest {
     toDoPage.navigate();
     toDoPage.inputToDo("Buy Sweets");
     toDoPage.inputToDo("Walk the dog");
-    toDoPage.clickDeleteFirstItem();
+    toDoPage.clickDeleteItem(1);
     TodoMVCReactPage.takeScreenshot(driver,"deleted.png");
     assertEquals(1, toDoPage.getLengthOfTodos());
 }
